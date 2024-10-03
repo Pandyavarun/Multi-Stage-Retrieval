@@ -1,0 +1,44 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Stage Retrieval System</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Multi-Stage Retrieval System</h1>
+        <form id="search-form">
+            <input type="text" id="query" name="query" placeholder="Enter your query..." required>
+            <button type="submit">Search</button>
+        </form>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        document.getElementById('search-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const query = document.getElementById('query').value;
+            const response = await fetch('/search', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ query })
+            });
+            const data = await response.json();
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+
+            data.results.forEach(result => {
+                const p = document.createElement('p');
+                p.textContent = `Passage: ${result[0]} - Score: ${result[1]}`;
+                resultsDiv.appendChild(p);
+            });
+        });
+    </script>
+</body>
+</html>

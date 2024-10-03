@@ -52,7 +52,7 @@ The system is implemented using the following tools:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/multi-stage-retrieval-system.git
+git clone https://github.com/pandyavarun/Multi-Stage-Retrieval.git
 cd multi-stage-retrieval-system
 ```
 
